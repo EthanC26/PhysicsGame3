@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -24,7 +23,7 @@ public class GameManager : MonoBehaviour
     #region Lives
     public event Action<int> OnLifeValueChanged;
     [SerializeField] private int maxLives = 10;
-    private int _lives = 5;
+    private int _lives = 3;
 
     public int lives
     {
@@ -37,18 +36,24 @@ public class GameManager : MonoBehaviour
                 GameOver();
                 return;
             }
-            if (_lives > value) Respawn();
-
+            if (_lives > value)
+            {
+                audioSource.PlayOneShot(DeathClip);
+                Respawn();
+            }
             _lives = value;
 
             if (_lives > maxLives) _lives = maxLives;
 
             OnLifeValueChanged?.Invoke(_lives);
 
-            Debug.Log($"{gameObject.name} lives has changed to {_lives}");
         }
     }
     #endregion
+
+    private MenuController CurrentMenuController;
+
+    public void SetMenuController(MenuController controller) => CurrentMenuController = controller;
 
     private void Awake()
     {
@@ -75,19 +80,25 @@ public class GameManager : MonoBehaviour
         _playerInstance.transform.position = currentCheckPoint.position;
     }
 
-    void GameOver()
+    void GameOver()//fix
     {
         if (lives <= 0)
         {
 
             string sceneName = (SceneManager.GetActiveScene().name.Contains("Level")) ? "GameOver" : "Level";
             SceneManager.LoadScene(sceneName);
-
-            Debug.Log("Game Over gose here :(");
+            CurrentMenuController.SetActiveState(MenuStates.GameOver);
+            
         }
 
-        lives = 3;
-
     }
+
+    public void Victory()//fix
+    {
+        string sceneName = (SceneManager.GetActiveScene().name.Contains("Level")) ? "GameOver" : "Level";
+        SceneManager.LoadScene(sceneName);
+        CurrentMenuController.SetActiveState(MenuStates.Victory);
+    }
+    
 
 }

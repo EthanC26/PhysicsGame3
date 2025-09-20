@@ -3,13 +3,13 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     Rigidbody2D rb;
-    BoxCollider2D bc;
     SpriteRenderer sr;
     Animator anim;
     
     private float speed = 5f;
     private GroundCheck gndck;
 
+    public bool hit = false;
     public bool isGrounded = false;
     private bool onEffector = false;
 
@@ -17,7 +17,6 @@ public class PlayerController : MonoBehaviour
     {
         sr = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
-        bc = GetComponent<BoxCollider2D>();
         gndck = GetComponent<GroundCheck>();
         anim = GetComponent<Animator>();
     }
@@ -40,8 +39,10 @@ public class PlayerController : MonoBehaviour
 
         //sprite flipping(right to left)
         if (hInput != 0) sr.flipX = (hInput < 0);
+
         anim.SetFloat("speed", Mathf.Abs(hInput));
         anim.SetBool("IsGrounded", isGrounded);
+        anim.SetBool("Hit", hit);
 
     }
 
@@ -58,7 +59,9 @@ public class PlayerController : MonoBehaviour
             if (rb.linearVelocity.y <= 0) isGrounded = gndck.isGrounded();
 
         }
-    //    else isGrounded = gndck.isGrounded();
+        else
+            isGrounded = gndck.isGrounded();
+    
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -68,7 +71,15 @@ public class PlayerController : MonoBehaviour
         if(collision.gameObject.CompareTag("Saw"))
         {
             GameManager.Instance.lives--;
+            hit = true;
         }
+        if(collision.gameObject.CompareTag("Goal"))
+        {
+            Debug.Log("Hit");
+            GameManager.Instance.Victory();
+        }
+        else
+        hit = false;
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -76,7 +87,5 @@ public class PlayerController : MonoBehaviour
         if(collision.gameObject.CompareTag("MovingGround"))//checking if leaving effector
             onEffector = false;
     }
-
-
 
 }

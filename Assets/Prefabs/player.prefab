@@ -192,7 +192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c819bb51c3c8484184a3c8fcd456c54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpHight: 1
+  jumpHight: 2
   jumpFallForce: 1
   jumpClip: {fileID: 8300000, guid: 8f64c483173ec234fac7e2b81e3a3745, type: 3}
   jumpCancelled: 0
@@ -243,7 +243,7 @@ AudioSource:
   m_GameObject: {fileID: 2788879371646225676}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 6779510689165333672, guid: 99c156af96d39084d8ed09447eaded54, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1

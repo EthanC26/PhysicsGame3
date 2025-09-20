@@ -8,6 +8,7 @@ TagManager:
   - RightCollider
   - Saw
   - MovingGround
+  - Goal
   layers:
   - Default
   - TransparentFX
