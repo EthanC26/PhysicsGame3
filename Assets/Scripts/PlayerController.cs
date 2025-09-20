@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour
             if (rb.linearVelocity.y <= 0) isGrounded = gndck.isGrounded();
 
         }
-        else isGrounded = gndck.isGrounded();
+    //    else isGrounded = gndck.isGrounded();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -67,8 +67,7 @@ public class PlayerController : MonoBehaviour
             onEffector = true;
         if(collision.gameObject.CompareTag("Saw"))
         {
-            Debug.Log("Hit");
-            Destroy(gameObject);
+            GameManager.Instance.lives--;
         }
     }
 
