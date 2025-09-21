@@ -22,10 +22,10 @@ public class GameManager : MonoBehaviour
 
     #region Lives
     public event Action<int> OnLifeValueChanged;
-    [SerializeField] private int maxLives = 10;
+    [SerializeField] private int maxLives = 3;
     private int _lives = 3;
 
-    public int lives
+    public int lives//player Lives
     {
         get => _lives;
         set
@@ -68,19 +68,19 @@ public class GameManager : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void InstantiatePlayer(Transform spawnLocation)
+    public void InstantiatePlayer(Transform spawnLocation)//spawn player
     {
         _playerInstance = Instantiate(playerPrefab,spawnLocation.position,Quaternion.identity);
         currentCheckPoint = spawnLocation;
         OnPlayerSpawned?.Invoke(_playerInstance);
     }
 
-    public void Respawn()
+    public void Respawn()//respawn player
     {
         _playerInstance.transform.position = currentCheckPoint.position;
     }
 
-    public void GameOver()//fix
+    public void GameOver()//end game
     {
             string sceneName = (SceneManager.GetActiveScene().name.Contains("Level")) ? "GameOver" : "Level";
             SceneManager.LoadScene(sceneName);

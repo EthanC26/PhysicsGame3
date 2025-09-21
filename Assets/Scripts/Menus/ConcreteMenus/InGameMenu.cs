@@ -11,7 +11,7 @@ public class InGameMenu : BaseMenu
         state = MenuStates.InGame;
 
         if(pauseBtn) pauseBtn.onClick.AddListener(() => SetNextMenu(MenuStates.Pause));
-        livesText.text = $"Lives: {GameManager.Instance.lives}";
+        livesText.text = $"Lives: {GameManager.Instance.lives + 1}";
 
         GameManager.Instance.OnLifeValueChanged += LifeValueChanged;
 

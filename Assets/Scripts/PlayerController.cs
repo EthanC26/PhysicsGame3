@@ -49,7 +49,6 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         CheckIsGrounded();
-        
     }
 
     void CheckIsGrounded()
@@ -75,7 +74,6 @@ public class PlayerController : MonoBehaviour
         }
         if(collision.gameObject.CompareTag("Goal"))
         {
-            Debug.Log("Hit");
             GameManager.Instance.GameOver();
         }
         else

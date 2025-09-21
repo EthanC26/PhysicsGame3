@@ -29,7 +29,6 @@ public class SlidingPlatform : MonoBehaviour
     {
         JointMotor2D motor = sj.motor;
 
-        //motor.motorSpeed = 0;
 
         motor.motorSpeed = 1;
         sj.motor = motor;
@@ -38,8 +37,6 @@ public class SlidingPlatform : MonoBehaviour
     private void AddNegativeSpeed()
     {
         JointMotor2D motor = sj.motor;
-
-        //moter.motorSpeed = 0;
 
         motor.motorSpeed = -1;
         sj.motor = motor;
