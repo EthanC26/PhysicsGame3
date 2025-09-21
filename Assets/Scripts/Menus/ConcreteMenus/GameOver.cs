@@ -17,6 +17,9 @@ public class GameOver : BaseMenu
         if (MainMenuBtn) MainMenuBtn.onClick.AddListener(() => SceneManager.LoadScene("MainMenu"));
         if (QuitBtn) QuitBtn.onClick.AddListener(QuitGame);
 
-        Title.text = "Game Over!\nYou Died!";
+        if (GameManager.Instance.lives <= 0)
+            Title.text = "Game Over!\nYou Died!";
+        else if (GameManager.Instance.lives > 0)
+            Title.text = "Game Over!\nYou Win!";
     }
 }

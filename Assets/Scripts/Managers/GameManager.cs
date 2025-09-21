@@ -80,25 +80,11 @@ public class GameManager : MonoBehaviour
         _playerInstance.transform.position = currentCheckPoint.position;
     }
 
-    void GameOver()//fix
+    public void GameOver()//fix
     {
-        if (lives <= 0)
-        {
-
             string sceneName = (SceneManager.GetActiveScene().name.Contains("Level")) ? "GameOver" : "Level";
             SceneManager.LoadScene(sceneName);
             CurrentMenuController.SetActiveState(MenuStates.GameOver);
-            
-        }
-
     }
-
-    public void Victory()//fix
-    {
-        string sceneName = (SceneManager.GetActiveScene().name.Contains("Level")) ? "GameOver" : "Level";
-        SceneManager.LoadScene(sceneName);
-        CurrentMenuController.SetActiveState(MenuStates.Victory);
-    }
-    
 
 }

@@ -76,7 +76,7 @@ public class PlayerController : MonoBehaviour
         if(collision.gameObject.CompareTag("Goal"))
         {
             Debug.Log("Hit");
-            GameManager.Instance.Victory();
+            GameManager.Instance.GameOver();
         }
         else
         hit = false;
